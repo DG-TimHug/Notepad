@@ -44,10 +44,10 @@ public partial class MainWindow : Window
         dialog.FileName = "Document";
         dialog.DefaultExt = ".txt";
         dialog.Filter = "Text documents (.txt)|*.txt";
-        bool? result = dialog.ShowDialog();
+        var result = dialog.ShowDialog();
         if (result == true)
         {
-            string filename = dialog.FileName;
+            var filename = dialog.FileName;
             File.WriteAllText(filename, TbContents.Text );
         }
     }
