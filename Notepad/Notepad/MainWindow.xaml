@@ -9,7 +9,6 @@
     <Grid>
         <TextBox
             TextWrapping="Wrap"
-            AcceptsReturn="True"
             VerticalScrollBarVisibility="Visible"
         >
             Type Something!
