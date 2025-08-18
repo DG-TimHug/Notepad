@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,6 +21,10 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+        
+    }
+    private void OpenFile()
+    {
         var dialog = new Microsoft.Win32.OpenFileDialog();
         dialog.FileName = "Document";
         dialog.DefaultExt = ".txt";
@@ -28,7 +33,13 @@ public partial class MainWindow : Window
         if (result == true)
         {
             var filename = dialog.FileName;
-            tbContents.Text = File.ReadAllText(filename);
+            TbContents.Text = File.ReadAllText(filename);
         }
     }
+    
+    private void OnClickOpenFile(object sender, RoutedEventArgs e)
+    {
+        OpenFile();
+    }
+    
 }

@@ -8,11 +8,15 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <TextBox
-            Name="tbContents"
+            Name="TbContents"
             TextWrapping="Wrap"
             VerticalScrollBarVisibility="Visible"
         >
-            
         </TextBox>
+        <Button HorizontalAlignment="Right" VerticalAlignment="Top"
+                BorderBrush="Black" BorderThickness="1" 
+                Click="OnClickOpenFile" ClickMode="Press">
+            Open File
+        </Button>
     </Grid>
 </Window>
