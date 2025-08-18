@@ -60,23 +60,4 @@ public partial class MainWindow : Window
     {
         SaveFile();
     }
-    private void OpenFile()
-    {
-        var dialog = new Microsoft.Win32.OpenFileDialog();
-        dialog.FileName = "Document";
-        dialog.DefaultExt = ".txt";
-        dialog.Filter = "Text documents (.txt)|*.txt";
-        var result = dialog.ShowDialog();
-        if (result == true)
-        {
-            var filename = dialog.FileName;
-            TbContents.Text = File.ReadAllText(filename);
-        }
-    }
-    
-    private void OnClickOpenFile(object sender, RoutedEventArgs e)
-    {
-        OpenFile();
-    }
-    
 }
