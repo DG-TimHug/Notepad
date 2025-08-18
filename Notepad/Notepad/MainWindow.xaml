@@ -8,10 +8,11 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <TextBox
+            Name="tbContents"
             TextWrapping="Wrap"
             VerticalScrollBarVisibility="Visible"
         >
-            Type Something!
+            
         </TextBox>
     </Grid>
 </Window>
