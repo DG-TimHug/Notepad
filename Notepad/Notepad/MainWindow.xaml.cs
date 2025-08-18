@@ -8,7 +8,6 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
-        
     }
 
     private void OpenFile()
@@ -54,7 +53,6 @@ public partial class MainWindow : Window
 
     private void OnClickSaveFile(object sender, RoutedEventArgs e)
     {
-        
         if (filename != null)
         {
             File.WriteAllText(filename, TbContents.Text );
@@ -63,6 +61,5 @@ public partial class MainWindow : Window
         {
             SaveAsFile();
         }
-        
     }
 }
