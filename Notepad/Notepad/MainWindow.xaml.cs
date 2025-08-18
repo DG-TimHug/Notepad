@@ -56,7 +56,7 @@ public partial class MainWindow : Window
         OpenFile();
     }
 
-    private void OnClickSaveFile(object sender, RoutedEventArgs e)
+    private void OnClickSaveAsFile(object sender, RoutedEventArgs e)
     {
         SaveFile();
     }

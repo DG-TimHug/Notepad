@@ -20,7 +20,7 @@
         </Button>
         <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" 
                 BorderBrush="Black" BorderThickness="1" 
-                Click="OnClickSaveFile" ClickMode="Press">
+                Click="OnClickSaveAsFile" ClickMode="Press">
             Save
         </Button>
     </Grid>
