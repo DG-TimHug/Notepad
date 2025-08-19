@@ -21,6 +21,11 @@
         <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" 
                 BorderBrush="Black" BorderThickness="1" 
                 Click="OnClickSaveAsFile" ClickMode="Press">
+            Save As
+        </Button>
+        <Button HorizontalAlignment="Left" VerticalAlignment="Bottom" 
+                BorderBrush="Black" BorderThickness="1" 
+                Click="OnClickSaveFile" ClickMode="Press">
             Save
         </Button>
     </Grid>
