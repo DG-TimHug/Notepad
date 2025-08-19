@@ -9,12 +9,16 @@ namespace Notepad;
 /// </summary>
 public partial class MainWindow 
 {
-    public string? CurrentFilePath;
+    private string? currentFilePath;
     
     public MainWindow()
     {
         InitializeComponent();
+        UpdateFontSize();
+    }
 
+    private void UpdateFontSize()
+    {
         FontSize.Header = GetFontSize();
     }
 
@@ -34,8 +38,8 @@ public partial class MainWindow
         if (result == true)
         {
             var fileUtils = new FileUtils();
-            CurrentFilePath = dialog.FileName;
-            MainTextBox.Text = fileUtils.OpenFile(CurrentFilePath);
+            currentFilePath = dialog.FileName;
+            MainTextBox.Text = fileUtils.OpenFile(currentFilePath);
         }
     }
 
@@ -50,22 +54,22 @@ public partial class MainWindow
         var result = dialog.ShowDialog();
         if (result == true)
         {
-            CurrentFilePath = dialog.FileName;
+            currentFilePath = dialog.FileName;
             var fileUtils = new FileUtils();
-            fileUtils.SaveFile(CurrentFilePath, MainTextBox.Text);
+            fileUtils.SaveFile(currentFilePath, MainTextBox.Text);
         }
     }
 
     public void OnClickSaveFile(object sender, RoutedEventArgs e)
     {
-        if (CurrentFilePath == null)
+        if (currentFilePath == null)
         {
             OnClickSaveAsFile(sender, e);
             return;
         }
         
         var fileUtils = new FileUtils();
-        fileUtils.SaveFile(CurrentFilePath, MainTextBox.Text);
+        fileUtils.SaveFile(currentFilePath, MainTextBox.Text);
     }
     private void Bold_Checked(object sender, RoutedEventArgs e)
     {
