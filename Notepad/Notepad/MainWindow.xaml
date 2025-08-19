@@ -5,35 +5,13 @@
          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
          xmlns:local="clr-namespace:Notepad"
          mc:Ignorable="d"
-         Title="Notepad" Height="450" Width="800">
+         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Menu>
-            <MenuItem Header="_Edit">
-                <MenuItem Command="ApplicationCommands.Copy"/>
-                <MenuItem Command="ApplicationCommands.Cut"/>
-                <MenuItem Command="ApplicationCommands.Paste"/>
-                <Separator/>
-                <MenuItem Header="_Open File" Click="OnClickOpenFile"/>
-                <MenuItem Header="_Save File" Click="OnClickSaveFile"/>
-                <MenuItem Header="_Save as File" Click="OnClickSaveAsFile"/>
-            </MenuItem>
-            <!-- InputGestureText="Ctrl+X" To be added in backend-->
-            <MenuItem Header="_Font">
-                <MenuItem Header="_Bold" IsCheckable="True"
-                          Checked="Bold_Checked"
-                          Unchecked="Bold_Unchecked"/>
-                <MenuItem Header="_Italic" IsCheckable="True"
-                          Checked="Italic_Checked"
-                          Unchecked="Italic_Unchecked"/>
-                <Separator/>
-                <MenuItem Header="I_ncrease Font Size"
-                          Click="IncreaseFont_Click"/>
-                <MenuItem Header="_Decrease Font Size"
-                          Click="DecreaseFont_Click"/>
-            </MenuItem>
-        </Menu>
-        <TextBox Name="TbContents" TextWrapping="Wrap"
-                 Margin="0, 20" Width="800" VerticalScrollBarVisibility="Visible" AcceptsReturn="True">
+        <TextBox
+            Name="TbContents"
+            TextWrapping="Wrap"
+            VerticalScrollBarVisibility="Visible"
+        >
         </TextBox>
     </Grid>
 </Window>
