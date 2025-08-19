@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Globalization;
+using System.IO;
 using System.Windows;
 
 namespace Notepad;
@@ -13,6 +14,13 @@ public partial class MainWindow
     public MainWindow()
     {
         InitializeComponent();
+
+        FontSize.Header = GetFontSize();
+    }
+
+    public double GetFontSize()
+    {
+        return (double) MainTextBox.FontSize;
     }
     
     public void OnClickOpenFile(object sender, RoutedEventArgs e)
@@ -83,15 +91,17 @@ public partial class MainWindow
     {
         if (MainTextBox.FontSize < 18)
         {
-            MainTextBox.FontSize += 2;
+            MainTextBox.FontSize += 1;
         }
+        FontSize.Header = GetFontSize();
     }
 
     private void DecreaseFont_Click(object sender, RoutedEventArgs e)
     {
         if (MainTextBox.FontSize > 10)
         {
-            MainTextBox.FontSize -= 2;
+            MainTextBox.FontSize -= 1;
         }
+        FontSize.Header = GetFontSize();
     }
 }
