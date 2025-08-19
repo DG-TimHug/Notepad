@@ -7,26 +7,32 @@
          mc:Ignorable="d"
          Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <TextBox
-            Name="TbContents"
-            TextWrapping="Wrap"
-            VerticalScrollBarVisibility="Visible"
-        >
-        </TextBox>
-        <Button HorizontalAlignment="Right" VerticalAlignment="Top"
-                BorderBrush="Black" BorderThickness="1" 
-                Click="OnClickOpenFile" ClickMode="Press">
-            Open File
-        </Button>
-        <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" 
-                BorderBrush="Black" BorderThickness="1" 
-                Click="OnClickSaveAsFile" ClickMode="Press">
-            Save As
-        </Button>
-        <Button HorizontalAlignment="Left" VerticalAlignment="Bottom" 
-                BorderBrush="Black" BorderThickness="1" 
-                Click="OnClickSaveFile" ClickMode="Press">
-            Save
-        </Button>
+        <Menu>
+            <MenuItem Header="_Edit">
+                <MenuItem Command="ApplicationCommands.Copy"/>
+                <MenuItem Command="ApplicationCommands.Cut"/>
+                <MenuItem Command="ApplicationCommands.Paste"/>
+                <Separator/>
+                <MenuItem Header="_Open File" Click="OnClickOpenFile"/>
+                <MenuItem Header="_Save File" Click="OnClickSaveFile"/>
+                <MenuItem Header="_Save as File" Click="OnClickSaveAsFile"/>
+            </MenuItem>
+            <!-- InputGestureText="Ctrl+X" To be added in backend-->
+            <MenuItem Header="_Font">
+                <MenuItem Header="_Bold" IsCheckable="True"
+                          Checked="Bold_Checked"
+                          Unchecked="Bold_Unchecked"/>
+                <MenuItem Header="_Italic" IsCheckable="True"
+                          Checked="Italic_Checked"
+                          Unchecked="Italic_Unchecked"/>
+                <Separator/>
+                <MenuItem Header="I_ncrease Font Size"
+                          Click="IncreaseFont_Click"/>
+                <MenuItem Header="_Decrease Font Size"
+                          Click="DecreaseFont_Click"/>
+            </MenuItem>
+        </Menu>
+        <TextBox Name="TbContents" TextWrapping="Wrap"
+                 Margin="0, 20" Width="800" VerticalScrollBarVisibility="Visible" AcceptsReturn="True"/>
     </Grid>
 </Window>
