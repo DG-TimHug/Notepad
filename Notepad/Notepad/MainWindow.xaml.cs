@@ -13,7 +13,6 @@ public partial class MainWindow
     public MainWindow()
     {
         InitializeComponent();
-        
     }
 
     private void OpenFile()
@@ -23,6 +22,7 @@ public partial class MainWindow
         dialog.DefaultExt = ".txt";
         dialog.Filter = "Text documents (.txt)|*.txt";
         var result = dialog.ShowDialog();
+        
         if (result == true)
         {
             currentFilePath = dialog.FileName;
