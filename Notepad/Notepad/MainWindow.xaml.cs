@@ -8,15 +8,15 @@ namespace Notepad;
 /// </summary>
 public partial class MainWindow 
 {
-    private string? currentFilePath;
+    public string? CurrentFilePath;
     
     public MainWindow()
     {
         InitializeComponent();
     }
-
-    private void OpenFile()
-    {
+    
+    public void OnClickOpenFile(object sender, RoutedEventArgs e)
+    {        
         var dialog = new Microsoft.Win32.OpenFileDialog();
         dialog.FileName = "Document";
         dialog.DefaultExt = ".txt";
@@ -25,12 +25,13 @@ public partial class MainWindow
         
         if (result == true)
         {
-            currentFilePath = dialog.FileName;
-            TbContents.Text = File.ReadAllText(currentFilePath);
+            var fileUtils = new FileUtils();
+            CurrentFilePath = dialog.FileName;
+            MainTextBox.Text = fileUtils.OpenFile(CurrentFilePath);
         }
     }
-    
-    private void SaveAsFile()
+
+    public void OnClickSaveAsFile(object sender, RoutedEventArgs e)
     {
         var dialog = new Microsoft.Win32.SaveFileDialog
         {
@@ -41,65 +42,56 @@ public partial class MainWindow
         var result = dialog.ShowDialog();
         if (result == true)
         {
-            currentFilePath = dialog.FileName;
-            File.WriteAllText(currentFilePath, TbContents.Text );
+            CurrentFilePath = dialog.FileName;
+            var fileUtils = new FileUtils();
+            fileUtils.SaveFile(CurrentFilePath, MainTextBox.Text);
         }
-    }
-    
-    private void OnClickOpenFile(object sender, RoutedEventArgs e)
-    {
-        OpenFile();
     }
 
-    private void OnClickSaveAsFile(object sender, RoutedEventArgs e)
+    public void OnClickSaveFile(object sender, RoutedEventArgs e)
     {
-        SaveAsFile();
-    }
-
-    private void OnClickSaveFile(object sender, RoutedEventArgs e)
-    {
-        if (currentFilePath != null)
+        if (CurrentFilePath == null)
         {
-            File.WriteAllText(currentFilePath, TbContents.Text );
+            OnClickSaveAsFile(sender, e);
+            return;
         }
-        else
-        {
-            SaveAsFile();
-        }
+        
+        var fileUtils = new FileUtils();
+        fileUtils.SaveFile(CurrentFilePath, MainTextBox.Text);
     }
     private void Bold_Checked(object sender, RoutedEventArgs e)
     {
-        TbContents.FontWeight = FontWeights.Bold;
+        MainTextBox.FontWeight = FontWeights.Bold;
     }
 
     private void Bold_Unchecked(object sender, RoutedEventArgs e)
     {
-        TbContents.FontWeight = FontWeights.Normal;
+        MainTextBox.FontWeight = FontWeights.Normal;
     }
 
     private void Italic_Checked(object sender, RoutedEventArgs e)
     {
-        TbContents.FontStyle = FontStyles.Italic;
+        MainTextBox.FontStyle = FontStyles.Italic;
     }
 
     private void Italic_Unchecked(object sender, RoutedEventArgs e)
     {
-        TbContents.FontStyle = FontStyles.Normal;
+        MainTextBox.FontStyle = FontStyles.Normal;
     }
 
     private void IncreaseFont_Click(object sender, RoutedEventArgs e)
     {
-        if (TbContents.FontSize < 18)
+        if (MainTextBox.FontSize < 18)
         {
-            TbContents.FontSize += 2;
+            MainTextBox.FontSize += 2;
         }
     }
 
     private void DecreaseFont_Click(object sender, RoutedEventArgs e)
     {
-        if (TbContents.FontSize > 10)
+        if (MainTextBox.FontSize > 10)
         {
-            TbContents.FontSize -= 2;
+            MainTextBox.FontSize -= 2;
         }
     }
 }
