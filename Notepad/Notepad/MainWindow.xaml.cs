@@ -4,7 +4,7 @@ namespace Notepad;
 
 public partial class MainWindow : Window
 {
-    private string? filename;
+    private string? currentFilePath;
     public MainWindow()
     {
         InitializeComponent();
@@ -21,8 +21,8 @@ public partial class MainWindow : Window
         var result = dialog.ShowDialog();
         if (result == true)
         {
-            filename = dialog.FileName;
-            TbContents.Text = File.ReadAllText(filename);
+            currentFilePath = dialog.FileName;
+            TbContents.Text = File.ReadAllText(currentFilePath);
         }
     }
 
@@ -37,8 +37,8 @@ public partial class MainWindow : Window
         var result = dialog.ShowDialog();
         if (result == true)
         {
-            filename = dialog.FileName;
-            File.WriteAllText(filename, TbContents.Text );
+            currentFilePath = dialog.FileName;
+            File.WriteAllText(currentFilePath, TbContents.Text );
         }
     }
     private void OnClickOpenFile(object sender, RoutedEventArgs e)
@@ -53,9 +53,9 @@ public partial class MainWindow : Window
 
     private void OnClickSaveFile(object sender, RoutedEventArgs e)
     {
-        if (filename != null)
+        if (currentFilePath != null)
         {
-            File.WriteAllText(filename, TbContents.Text );
+            File.WriteAllText(currentFilePath, TbContents.Text );
         }
         else
         {
