@@ -26,13 +26,14 @@
                           Checked="Italic_Checked"
                           Unchecked="Italic_Unchecked"/>
                 <Separator/>
-                <MenuItem Header="I_ncrease Font Size"
+                <MenuItem Header="Increase Font Size"
                           Click="IncreaseFont_Click"/>
-                <MenuItem Header="_Decrease Font Size"
+                <MenuItem Header="Decrease Font Size"
                           Click="DecreaseFont_Click"/>
+                <MenuItem Name="FontSize"/>
             </MenuItem>
         </Menu>
-        <TextBox Name="TbContents" TextWrapping="Wrap"
+        <TextBox Name="MainTextBox" TextWrapping="Wrap"
                  Margin="0, 20" Width="800" VerticalScrollBarVisibility="Visible" AcceptsReturn="True"/>
     </Grid>
 </Window>
