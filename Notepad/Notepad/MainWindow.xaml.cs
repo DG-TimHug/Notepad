@@ -97,7 +97,7 @@ public partial class MainWindow
         {
             MainTextBox.FontSize += 1;
         }
-        FontSize.Header = GetFontSize();
+        UpdateFontSize();
     }
 
     private void DecreaseFont_Click(object sender, RoutedEventArgs e)
@@ -106,6 +106,6 @@ public partial class MainWindow
         {
             MainTextBox.FontSize -= 1;
         }
-        FontSize.Header = GetFontSize();
+        UpdateFontSize();
     }
 }
