@@ -5,7 +5,7 @@
          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
          xmlns:local="clr-namespace:Notepad"
          mc:Ignorable="d"
-         Title="MainWindow" Height="450" Width="800">
+         Title="Notepad" Height="450" Width="800">
     <Grid>
         <Menu>
             <MenuItem Header="_Edit">
@@ -33,7 +33,7 @@
             </MenuItem>
         </Menu>
         <TextBox Name="TbContents" TextWrapping="Wrap"
-                 Margin="0, 20" Width="800" VerticalScrollBarVisibility="Visible">
+                 Margin="0, 20" Width="800" VerticalScrollBarVisibility="Visible" AcceptsReturn="True">
         </TextBox>
     </Grid>
 </Window>
