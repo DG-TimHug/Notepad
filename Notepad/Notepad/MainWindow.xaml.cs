@@ -19,7 +19,7 @@ public partial class MainWindow
     }
 
     private void TabsChanged(object sender, RoutedEventArgs e)
-    {
+    {   
         if (GetSelectedTab() == 0)
         {
             UpdateFontSize();
@@ -35,22 +35,26 @@ public partial class MainWindow
     {
         FontSize.Header = GetTabFontSize();
     }
-    
-    public double GetTabFontSize()
+
+    private double GetTabFontSize()
+    {
+        return GetCurrentTextBox().FontSize;
+    }
+
+    private TextBox GetCurrentTextBox()
     {
         if (GetSelectedTab() == 0)
         {
-            return MainTextBox.FontSize;
+            return MainTextBox;
         }
 
-        if (GetSelectedTab() == 1)
+        else //(GetSelectedTab() == 1)
         {
-            return SecondaryTextbox.FontSize;
+            return SecondaryTextbox;
         }
+    }
 
-        return -1;
-    }  
-    public void OnClickOpenFile(object sender, RoutedEventArgs e)
+    private void OnClickOpenFile(object sender, RoutedEventArgs e)
     {
         var dialog = new Microsoft.Win32.OpenFileDialog();
         dialog.FileName = "Document";
@@ -60,23 +64,13 @@ public partial class MainWindow
         
         if (result == true)
         {
-            if (GetSelectedTab() == 0)
-            {
-                var fileUtils = new FileUtils();
-                currentFilePath = dialog.FileName;
-                MainTextBox.Text = fileUtils.OpenFile(currentFilePath);
-            }
-
-            if (GetSelectedTab() == 1)
-            { 
-                var fileUtils = new FileUtils();
-                currentFilePath = dialog.FileName;
-                SecondaryTextbox.Text = fileUtils.OpenFile(currentFilePath);
-            }
+            var fileUtils = new FileUtils();
+            currentFilePath = dialog.FileName;
+            GetCurrentTextBox().Text = fileUtils.OpenFile(currentFilePath);
         }
     }
 
-    public void OnClickSaveAsFile(object sender, RoutedEventArgs e)
+    private void OnClickSaveAsFile(object sender, RoutedEventArgs e)
     {
         var dialog = new Microsoft.Win32.SaveFileDialog
         {
@@ -87,137 +81,65 @@ public partial class MainWindow
         var result = dialog.ShowDialog();
         if (result == true)
         {
-            if (GetSelectedTab() == 0)
-            {
-                currentFilePath = dialog.FileName;
-                var fileUtils = new FileUtils();
-                fileUtils.SaveFile(currentFilePath, MainTextBox.Text);
-            }
-
-            if (GetSelectedTab() == 1)
-            {
-                currentFilePath = dialog.FileName;
-                var fileUtils = new FileUtils();
-                fileUtils.SaveFile(currentFilePath, SecondaryTextbox.Text);
-            }
+            
+            currentFilePath = dialog.FileName;
+            var fileUtils = new FileUtils();
+            fileUtils.SaveFile(currentFilePath, GetCurrentTextBox().Text);
         }
     }
 
-    public void OnClickSaveFile(object sender, RoutedEventArgs e)
+    private void OnClickSaveFile(object sender, RoutedEventArgs e)
     {
         if (currentFilePath == null)
         {
             OnClickSaveAsFile(sender, e);
             return;
         }
-        if (GetSelectedTab() == 0)
-        {
-            var fileUtils = new FileUtils();
-            fileUtils.SaveFile(currentFilePath, MainTextBox.Text);
-        }
-
-        if (GetSelectedTab() == 1)
-        {
-            var fileUtils = new FileUtils();
-            fileUtils.SaveFile(currentFilePath, SecondaryTextbox.Text);
-        }
+        var fileUtils = new FileUtils();
+        fileUtils.SaveFile(currentFilePath, GetCurrentTextBox().Text);
     }
     private void Bold_Checked(object sender, RoutedEventArgs e)
     {
-        if (GetSelectedTab() == 0)
-        {
-            MainTextBox.FontWeight = FontWeights.Bold;
-        }
-        if (GetSelectedTab() == 1)
-        {
-            SecondaryTextbox.FontWeight = FontWeights.Bold;
-        }
+        GetCurrentTextBox().FontWeight = FontWeights.Bold;
     }
 
     private void Bold_Unchecked(object sender, RoutedEventArgs e)
     {
-        if (GetSelectedTab() == 0)
-        {
-            MainTextBox.FontWeight = FontWeights.Normal;
-        }
-
-        if (GetSelectedTab() == 1)
-        {
-            SecondaryTextbox.FontWeight = FontWeights.Normal;
-        }
+        GetCurrentTextBox().FontWeight = FontWeights.Normal;
     }
 
     private void Italic_Checked(object sender, RoutedEventArgs e)
     {
-        if (GetSelectedTab() == 0)
-        {
-            MainTextBox.FontStyle = FontStyles.Italic;
-        }
-
-        if (GetSelectedTab() == 1)
-        {
-            SecondaryTextbox.FontStyle = FontStyles.Italic;
-        }
+        GetCurrentTextBox().FontStyle = FontStyles.Italic;
     }
 
     private void Italic_Unchecked(object sender, RoutedEventArgs e)
     {
-        if (GetSelectedTab() == 0)
-        {
-            MainTextBox.FontStyle = FontStyles.Normal;
-        }
-
-        if (GetSelectedTab() == 1)
-        {
-            SecondaryTextbox.FontWeight = FontWeights.Normal;
-        }
+        GetCurrentTextBox().FontWeight = FontWeights.Normal;
     }
 
     private void IncreaseFont_Click(object sender, RoutedEventArgs e)
     {
-        if (GetSelectedTab() == 0)
-        {
-            if (MainTextBox.FontSize < 18)
-            {
-                MainTextBox.FontSize += 1;
-            }
-            UpdateFontSize();
+        if (GetCurrentTextBox().FontSize < 18)
+        { 
+            GetCurrentTextBox().FontSize += 1;
         }
-
-        if (GetSelectedTab() == 1)
-        {
-            if (SecondaryTextbox.FontSize < 18)
-            {
-                SecondaryTextbox.FontSize += 1;
-            }
-            UpdateFontSize();
-        }
+        UpdateFontSize();
     }
 
     private void DecreaseFont_Click(object sender, RoutedEventArgs e)
     {
-        if (GetSelectedTab() == 0)
-        {
-            if (MainTextBox.FontSize > 10)
-            {
-                MainTextBox.FontSize -= 1;
-            }
-            UpdateFontSize();
+        if (GetCurrentTextBox().FontSize> 10)
+        { 
+            GetCurrentTextBox().FontSize-= 1;
         }
-
-        if (GetSelectedTab() == 1)
-        {
-            if (MainTextBox.FontSize > 10)
-            {
-                MainTextBox.FontSize -= 1;
-            }
-            UpdateFontSize();
-        }
+        UpdateFontSize();
     }
 
     private int GetSelectedTab()
     {
         var selectedTab = Tabs.SelectedIndex;
+        Console.WriteLine(selectedTab);
         return selectedTab;
     }
     //Tabs.items.add/ remove
