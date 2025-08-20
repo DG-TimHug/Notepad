@@ -20,7 +20,6 @@ public partial class MainWindow
 
     private void TabsChanged(object sender, RoutedEventArgs e)
     {
-        GetCurrentTextBox();
         UpdateFontSize();
     }
 
