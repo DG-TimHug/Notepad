@@ -1,6 +1,6 @@
-﻿using System.Globalization;
-using System.IO;
+﻿//hi :)
 using System.Windows;
+using System.Windows.Controls;
 
 namespace Notepad;
 
@@ -14,21 +14,40 @@ public partial class MainWindow
     public MainWindow()
     {
         InitializeComponent();
+        Tabs.SelectionChanged += TabsChanged;
+        UpdateFontSize();
+    }
+
+    private void TabsChanged(object sender, RoutedEventArgs e)
+    {
         UpdateFontSize();
     }
 
     private void UpdateFontSize()
     {
-        FontSize.Header = GetFontSize();
+        FontSize.Header = GetTabFontSize();
     }
 
-    public double GetFontSize()
+    private double GetTabFontSize()
     {
-        return (double) MainTextBox.FontSize;
+        return GetCurrentTextBox().FontSize;
     }
-    
-    public void OnClickOpenFile(object sender, RoutedEventArgs e)
-    {        
+
+    private TextBox GetCurrentTextBox()
+    {
+        if (GetSelectedTab() == 0)
+        {
+            return MainTextBox;
+        }
+
+        else //(GetSelectedTab() == 1)
+        {
+            return SecondaryTextbox;
+        }
+    }
+
+    private void OnClickOpenFile(object sender, RoutedEventArgs e)
+    {
         var dialog = new Microsoft.Win32.OpenFileDialog();
         dialog.FileName = "Document";
         dialog.DefaultExt = ".txt";
@@ -39,11 +58,11 @@ public partial class MainWindow
         {
             var fileUtils = new FileUtils();
             currentFilePath = dialog.FileName;
-            MainTextBox.Text = fileUtils.OpenFile(currentFilePath);
+            GetCurrentTextBox().Text = fileUtils.OpenFile(currentFilePath);
         }
     }
 
-    public void OnClickSaveAsFile(object sender, RoutedEventArgs e)
+    private void OnClickSaveAsFile(object sender, RoutedEventArgs e)
     {
         var dialog = new Microsoft.Win32.SaveFileDialog
         {
@@ -54,58 +73,65 @@ public partial class MainWindow
         var result = dialog.ShowDialog();
         if (result == true)
         {
+            
             currentFilePath = dialog.FileName;
             var fileUtils = new FileUtils();
-            fileUtils.SaveFile(currentFilePath, MainTextBox.Text);
+            fileUtils.SaveFile(currentFilePath, GetCurrentTextBox().Text);
         }
     }
 
-    public void OnClickSaveFile(object sender, RoutedEventArgs e)
+    private void OnClickSaveFile(object sender, RoutedEventArgs e)
     {
         if (currentFilePath == null)
         {
             OnClickSaveAsFile(sender, e);
             return;
         }
-        
         var fileUtils = new FileUtils();
-        fileUtils.SaveFile(currentFilePath, MainTextBox.Text);
+        fileUtils.SaveFile(currentFilePath, GetCurrentTextBox().Text);
     }
     private void Bold_Checked(object sender, RoutedEventArgs e)
     {
-        MainTextBox.FontWeight = FontWeights.Bold;
+        GetCurrentTextBox().FontWeight = FontWeights.Bold;
     }
 
     private void Bold_Unchecked(object sender, RoutedEventArgs e)
     {
-        MainTextBox.FontWeight = FontWeights.Normal;
+        GetCurrentTextBox().FontWeight = FontWeights.Normal;
     }
 
     private void Italic_Checked(object sender, RoutedEventArgs e)
     {
-        MainTextBox.FontStyle = FontStyles.Italic;
+        GetCurrentTextBox().FontStyle = FontStyles.Italic;
     }
 
     private void Italic_Unchecked(object sender, RoutedEventArgs e)
     {
-        MainTextBox.FontStyle = FontStyles.Normal;
+        GetCurrentTextBox().FontWeight = FontWeights.Normal;
     }
 
     private void IncreaseFont_Click(object sender, RoutedEventArgs e)
     {
-        if (MainTextBox.FontSize < 18)
-        {
-            MainTextBox.FontSize += 1;
+        if (GetCurrentTextBox().FontSize < 18)
+        { 
+            GetCurrentTextBox().FontSize += 1;
         }
         UpdateFontSize();
     }
 
     private void DecreaseFont_Click(object sender, RoutedEventArgs e)
     {
-        if (MainTextBox.FontSize > 10)
-        {
-            MainTextBox.FontSize -= 1;
+        if (GetCurrentTextBox().FontSize> 10)
+        { 
+            GetCurrentTextBox().FontSize-= 1;
         }
         UpdateFontSize();
     }
+
+    private int GetSelectedTab()
+    {
+        var selectedTab = Tabs.SelectedIndex;
+        return selectedTab;
+    }
+    //Tabs.items.add/ remove
 }
