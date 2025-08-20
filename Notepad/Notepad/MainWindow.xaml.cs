@@ -40,6 +40,7 @@ public partial class MainWindow
             var fileUtils = new FileUtils();
             currentFilePath = dialog.FileName;
             MainTextBox.Text = fileUtils.OpenFile(currentFilePath);
+            SecondaryTextbox.Text = fileUtils.OpenFile(currentFilePath);
         }
     }
 
@@ -108,4 +109,6 @@ public partial class MainWindow
         }
         UpdateFontSize();
     }
+    
+    
 }

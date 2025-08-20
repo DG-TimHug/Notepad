@@ -7,7 +7,21 @@
          mc:Ignorable="d"
          Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Menu>
+        <TabControl >
+            <TabItem Header="Current File" >
+                <TabItem.Content>
+                    <TextBox Name="MainTextBox" TextWrapping="Wrap"
+                             Width="800" VerticalScrollBarVisibility="Visible" AcceptsReturn="True"/>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem Header="Second File" > <!--Place Holder Names-->
+                <TabItem.Content>
+                    <TextBox Name="SecondaryTextbox" TextWrapping="Wrap"
+                             Width="800" VerticalScrollBarVisibility="Visible" AcceptsReturn="True"/>
+                </TabItem.Content>
+            </TabItem>
+        </TabControl>
+        <Menu HorizontalAlignment="Right" VerticalAlignment="Top">
             <MenuItem Header="_Edit">
                 <MenuItem Command="ApplicationCommands.Copy"/>
                 <MenuItem Command="ApplicationCommands.Cut"/>
@@ -33,7 +47,5 @@
                 <MenuItem Header="Font Size = " Name="FontSize"/>
             </MenuItem>
         </Menu>
-        <TextBox Name="MainTextBox" TextWrapping="Wrap"
-                 Margin="0, 20" Width="800" VerticalScrollBarVisibility="Visible" AcceptsReturn="True"/>
     </Grid>
 </Window>
