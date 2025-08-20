@@ -30,7 +30,7 @@
                           Click="IncreaseFont_Click"/>
                 <MenuItem Header="Decrease Font Size"
                           Click="DecreaseFont_Click"/>
-                <MenuItem Name="FontSize"/>
+                <MenuItem Header="Font Size = " Name="FontSize"/>
             </MenuItem>
         </Menu>
         <TextBox Name="MainTextBox" TextWrapping="Wrap"
