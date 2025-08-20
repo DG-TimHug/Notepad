@@ -131,7 +131,6 @@ public partial class MainWindow
     private int GetSelectedTab()
     {
         var selectedTab = Tabs.SelectedIndex;
-        Console.WriteLine(selectedTab);
         return selectedTab;
     }
     //Tabs.items.add/ remove
