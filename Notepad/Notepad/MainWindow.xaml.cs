@@ -19,16 +19,9 @@ public partial class MainWindow
     }
 
     private void TabsChanged(object sender, RoutedEventArgs e)
-    {   
-        if (GetSelectedTab() == 0)
-        {
-            UpdateFontSize();
-        }
-
-        if (GetSelectedTab() == 1)
-        {
-            UpdateFontSize();
-        }
+    {
+        GetCurrentTextBox();
+        UpdateFontSize();
     }
 
     private void UpdateFontSize()
